@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from werkzeug import secure_filename
 import boto3
 app = Flask(__name__)
@@ -26,4 +26,4 @@ def upload_files():
 @app.route('/download/<key>')
 def download_file(key):
     client.download_file(Bucket=bucket, Key=key, Filename=key)
-    return "The file is " + str(key)
+    return send_file('./'+key, as_attachment=True)
