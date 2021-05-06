@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Webapp</title>
+  </head>
+  <body>
+    {% if StatusCode == 200 : %}
+    <h3>Click file to download</h3>
+      <ul>
+        {%- for object in objects %}
+          <li><a href="/download/{{ object['Key'] }}">{{ object['Key'] }}</a></li>
+        {% endfor %}
+    {% else %}
+      <h1>Object listing request returned error {{ StatusCode }}</h1>
+    {% endif %}
+      </ul>
+
+    <form action = "http://localhost:5000/uploader" method = "POST"
+      enctype = "multipart/form-data">
+      <h3>Select file for upload</h3>
+        <input type = "file" name = "file" />
+        <input type = "submit" value = "upload"/>
+    </form>
+  </body>
+</html>
